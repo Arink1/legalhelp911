@@ -1,0 +1,252 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0e1d30;
+  --color-ink-2: #16293f;
+  --color-ink-3: #23374f;
+  --color-paper: #f7f6f2;
+  --color-card: #ffffff;
+  --color-line: #ddd8cd;
+  --color-muted: #5b6674;
+  --color-brass: #b08d42;
+  --color-brass-soft: #f0e7d3;
+  --color-signal: #c0392b;
+  --color-signal-dark: #a53125;
+
+  --font-display: var(--font-spectral), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-public-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-plex-mono), Consolas, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.live-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brass);
+  outline-offset: 2px;
+}
+
+/* Markdown article body (news posts) */
+.article-body {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--color-ink-2);
+}
+
+.article-body p {
+  margin-bottom: 1.25rem;
+}
+
+.article-body h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 2rem 0 0.75rem;
+  color: var(--color-ink);
+}
+
+.article-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+  color: var(--color-ink);
+}
+
+.article-body ul,
+.article-body ol {
+  margin: 0 0 1.25rem 1.35rem;
+  list-style: disc;
+}
+
+.article-body ol {
+  list-style: decimal;
+}
+
+.article-body li {
+  margin-bottom: 0.4rem;
+}
+
+.article-body li::marker {
+  color: var(--color-brass);
+}
+
+.article-body strong {
+  color: var(--color-ink);
+}
+
+.article-body a {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@layer components {
+/* Wireframe 1a/1e primitives: pill buttons, framed boxes, sticky-bar spacing */
+.pill {
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.pill-primary {
+  background: var(--color-signal);
+  color: #fff;
+}
+.pill-primary:hover { background: var(--color-signal-dark); }
+
+.pill-outline {
+  border: 1.75px solid var(--color-ink);
+  color: var(--color-ink);
+  background: var(--color-card);
+}
+.pill-outline:hover { background: var(--color-ink); color: #fff; }
+
+/* Frame stroke from the handoff: 1.5px, 14px radius */
+.frame {
+  border: 1.5px solid var(--color-ink);
+  border-radius: 14px;
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.53rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* Reserve room so the fixed action bar never covers the last section */
+.pb-sticky { padding-bottom: 5.5rem; }
+
+/* Pill form fields, per the handoff's input treatment */
+.field-pill {
+  width: 100%;
+  min-height: 44px;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  font-size: 0.9rem;
+  background: #fff;
+  color: var(--color-ink);
+}
+.field-pill::placeholder { color: var(--color-muted); }
+.field-pill:focus { outline: 2px solid var(--color-brass); outline-offset: 2px; }
+
+.field-area {
+  width: 100%;
+  min-height: 64px;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 14px;
+  padding: 0.7rem 1rem;
+  font-size: 0.9rem;
+  background: #fff;
+  color: var(--color-ink);
+}
+.field-area::placeholder { color: var(--color-muted); }
+.field-area:focus { outline: 2px solid var(--color-brass); outline-offset: 2px; }
+
+/* Horizontal chip/tab strip with snap */
+.strip {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.strip::-webkit-scrollbar { display: none; }
+.strip > * { scroll-snap-align: start; flex: none; }
+}
+
+/* Staggered practice-card reveal.
+   Each card rises in and the brass accent sweeps its border once, in
+   sequence, then settles so the normal hover state takes over. Runs a
+   single time when the row scrolls into view. */
+.reveal-cards > * {
+  opacity: 0;
+}
+
+.reveal-cards.is-in > * {
+  animation: card-light 620ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.reveal-cards.is-in > *:nth-child(1) { animation-delay: 0ms; }
+.reveal-cards.is-in > *:nth-child(2) { animation-delay: 95ms; }
+.reveal-cards.is-in > *:nth-child(3) { animation-delay: 190ms; }
+.reveal-cards.is-in > *:nth-child(4) { animation-delay: 285ms; }
+.reveal-cards.is-in > *:nth-child(5) { animation-delay: 380ms; }
+
+@keyframes card-light {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(0);
+    /* the accent catches, then releases */
+    box-shadow:
+      0 0 0 1.5px var(--color-brass),
+      0 8px 22px -14px rgba(176, 141, 66, 0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+/* Reduced motion: no movement, no sweep, nothing hidden. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-cards > *,
+  .reveal-cards.is-in > * {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+}

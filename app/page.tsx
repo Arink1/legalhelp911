@@ -173,10 +173,11 @@ export default function Home() {
                 </p>
               </div>
             )}
-            <p className="mb-8 text-center text-[16px] leading-[1.4] text-muted md:mb-12">
+            <p className="mb-8 text-center text-[16px] leading-[1.4] text-muted md:mb-10">
               What the firm offers every caller
             </p>
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-8 text-center md:gap-12">
+            {/* Stats sit directly under the principal's block, same width as his bio. */}
+            <div className="mx-auto grid max-w-[760px] grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-8 text-center md:gap-10">
               {[
                 [`${YEARS_IN_PRACTICE} yrs`, "Of practice behind the firm"],
                 ["Free", "First case review, every practice area"],

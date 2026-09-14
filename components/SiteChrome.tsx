@@ -2,6 +2,8 @@ import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import {
+  EMAIL_DISPLAY,
+  EMAIL_LINK,
   PHONE_DISPLAY,
   PHONE_TEL,
   SMS_LINK,
@@ -60,6 +62,11 @@ export function Footer() {
               <li>
                 <a href={SMS_LINK} className={footerLink}>
                   Text the firm
+                </a>
+              </li>
+              <li>
+                <a href={EMAIL_LINK} data-analytics="email_tap_footer" className={footerLink}>
+                  {EMAIL_DISPLAY}
                 </a>
               </li>
               <li>

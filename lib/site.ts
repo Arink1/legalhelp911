@@ -9,6 +9,10 @@ export const FIRM_SHORT = "Trumbach Law";
 export const PHONE_DISPLAY = "(954) 444-6209";
 export const PHONE_TEL = "tel:+19544446209";
 export const SMS_LINK = "sms:+19544446209";
+// The only email the site publishes. Attorneys' direct lines and inboxes
+// are never shown; every contact channel routes through firm intake.
+export const EMAIL_DISPLAY = "support@legalhelp911.com";
+export const EMAIL_LINK = "mailto:support@legalhelp911.com";
 
 // TODO: confirm with the firm. This is the one hard number the site claims,
 // so it must be right. The handoff lists 38 years and free consultation as

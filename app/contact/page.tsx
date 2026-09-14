@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { TopBar, Footer } from "@/components/SiteChrome";
 import CaseReviewForm from "@/components/CaseReviewForm";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema";
-import { PHONE_DISPLAY, PHONE_TEL, SITE_NAME, OFFICE } from "@/lib/site";
+import { EMAIL_DISPLAY, EMAIL_LINK, PHONE_DISPLAY, PHONE_TEL, SITE_NAME, OFFICE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `Free case review | ${SITE_NAME}`,
@@ -75,6 +75,12 @@ export default function ContactPage() {
                   <p className="mb-4 text-[15px] leading-normal text-muted">
                     {OFFICE.hours[0][1]}. {OFFICE.hours[1][0]} by appointment.{" "}
                     {OFFICE.perks.join(". ")}.
+                  </p>
+                  <p className="mb-4 text-[15px] leading-normal">
+                    Email{" "}
+                    <a href={EMAIL_LINK} data-analytics="email_tap_contact" className="font-medium text-ink">
+                      {EMAIL_DISPLAY}
+                    </a>
                   </p>
                   <p className="text-[15px] leading-normal">
                     <a

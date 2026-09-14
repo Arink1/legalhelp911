@@ -1,4 +1,4 @@
-import { OFFICE, FIRM_NAME, PHONE_DISPLAY, YEARS_IN_PRACTICE, PRACTICE_AREAS } from "@/lib/site";
+import { OFFICE, FIRM_NAME, PHONE_DISPLAY, EMAIL_DISPLAY, YEARS_IN_PRACTICE, PRACTICE_AREAS } from "@/lib/site";
 
 /**
  * LocalBusiness / LegalService structured data, emitted with the firm's real
@@ -13,6 +13,7 @@ export default function LocalBusinessSchema() {
     name: FIRM_NAME,
     url: "https://legalhelp911.com",
     telephone: PHONE_DISPLAY,
+    email: EMAIL_DISPLAY,
     address: {
       "@type": "PostalAddress",
       streetAddress: OFFICE.street,

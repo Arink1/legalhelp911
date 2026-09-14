@@ -15,6 +15,25 @@ project.
 - **Database**: Supabase Postgres, `lh911_leads` table with RLS enabled
   (`supabase/schema.sql`).
 
+## Design system (redesign, 2026-09-14)
+
+The site follows the `design_handoff_legalhelp911` spec: cream canvas
+(`#F3F0EE`), ink CTAs, one accent orange used only for indicator dots, Sofia
+Sans at body weight 450, radii 20 / 28 / 40 / 999px. Tokens live in
+`app/globals.css` (`@theme`), along with the `.btn`, `.chip`, `.card`,
+`.panel`, `.field`, `.eyebrow` and type-scale classes. Legacy token names
+(`paper`, `card`, `brass`, `signal`) are aliased to the new palette so pages
+outside the redesign (news, about, results, bios, es) stay on-brand.
+
+Redesigned pages: `/` (hero mosaic, stats, steps, practice accordion, FAQ),
+`/practice`, `/attorneys`, `/contact` (inline success state). Shared chrome:
+`SiteNav` (urgency strip + sticky pill), `Footer`, `NewsletterSignup` modal.
+
+**Newsletter sign-ups** post to `app/api/newsletter/route.ts`, which writes
+to `lh911_subscribers`. Run the new block at the bottom of
+`supabase/schema.sql` in the Supabase SQL editor once, or the modal will
+report an error on submit.
+
 ## Current state (as of 2026-08-31)
 
 Live at https://legalhelp911.vercel.app and **the lead form saves to

@@ -13,7 +13,7 @@ export default function AboutPage() {
   return (
     <FirmPage
       crumbs={[{ href: "/", label: "Home" }, { label: "About" }]}
-      title={`${YEARS_IN_PRACTICE} years in {OFFICE.county}. That is the whole pitch.`}
+      title={`${YEARS_IN_PRACTICE} years in ${OFFICE.county}. That is the whole pitch.`}
       aside={
         <dl className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
           {[

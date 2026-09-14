@@ -1,36 +1,27 @@
 import type { Metadata } from "next";
-import { Spectral, Public_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Sofia_Sans } from "next/font/google";
 import "./globals.css";
 
-const spectral = Spectral({
+// One family for the whole site. Sofia Sans is the open substitute for the
+// design's MarkForMC, and it is variable, which matters because body copy
+// sits at weight 450, a half step.
+const sofia = Sofia_Sans({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-spectral",
-});
-
-const publicSans = Public_Sans({
-  subsets: ["latin"],
-  variable: "--font-public-sans",
-});
-
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-plex-mono",
+  weight: "variable",
+  variable: "--font-sofia",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://legalhelp911.com"),
-  title: "Trumbach Firm | Talk to a lawyer in the next 5 minutes",
+  title: "LegalHelp911 | Talk to a lawyer today, not next month",
   description:
-    "Hurt, arrested, or served papers? 38 years in practice, free consultation, we answer 24/7.",
+    "The Law Offices of Tyler A. Trumbach, P.A. handles criminal defense, family law, civil litigation, business matters, and personal injury from Plantation, Florida. The first case review is free.",
   openGraph: {
-    title: "Trumbach Firm | Talk to a lawyer in the next 5 minutes",
+    title: "LegalHelp911 | Talk to a lawyer today, not next month",
     description:
-      "Hurt, arrested, or served papers? 38 years in practice, free consultation, we answer 24/7.",
-    // No hard-coded url here: pages that set their own canonical would
-    // otherwise all share the homepage URL in their social preview.
-    siteName: "Trumbach Firm",
+      "Criminal defense, family law, civil litigation, business, and personal injury in Broward County. Free first case review. Phone intake 24 hours.",
+    siteName: "LegalHelp911",
     type: "website",
   },
 };
@@ -39,10 +30,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${spectral.variable} ${publicSans.variable} ${plexMono.variable}`}
-    >
+    <html lang="en" className={sofia.variable}>
       <body>{children}</body>
     </html>
   );

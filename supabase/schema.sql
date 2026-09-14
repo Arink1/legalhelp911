@@ -67,3 +67,19 @@ grant select, insert, update, delete on public.lh911_posts to service_role;
 -- No-op when they hold nothing already.
 revoke all on public.lh911_leads from anon, authenticated;
 revoke all on public.lh911_posts from anon, authenticated;
+
+-- ---------------------------------------------------------------------------
+-- Newsletter sign-ups (footer "Get legal tips by email" modal).
+-- Written by app/api/newsletter/route.ts with the service role key.
+-- ---------------------------------------------------------------------------
+create table if not exists public.lh911_subscribers (
+  id          uuid primary key default gen_random_uuid(),
+  created_at  timestamptz not null default now(),
+  email       text not null unique,
+  source      text not null default 'legalhelp911.com',
+  unsubscribed_at timestamptz
+);
+
+alter table public.lh911_subscribers enable row level security;
+grant select, insert, update, delete on public.lh911_subscribers to service_role;
+revoke all on public.lh911_subscribers from anon, authenticated;

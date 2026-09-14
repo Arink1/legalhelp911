@@ -1,21 +1,49 @@
 @import "tailwindcss";
 
+/* ── Design tokens (handoff: warm editorial system) ─────────────────────
+   Cream canvas, ink CTAs, one accent orange used only for tiny dots.
+   The legacy aliases at the bottom keep pages that were not part of the
+   redesign (news, about, results, bios, es) on the same palette without
+   touching their markup. */
 @theme {
-  --color-ink: #0e1d30;
-  --color-ink-2: #16293f;
-  --color-ink-3: #23374f;
-  --color-paper: #f7f6f2;
-  --color-card: #ffffff;
-  --color-line: #ddd8cd;
-  --color-muted: #5b6674;
-  --color-brass: #b08d42;
-  --color-brass-soft: #f0e7d3;
-  --color-signal: #c0392b;
-  --color-signal-dark: #a53125;
+  --color-canvas: #f3f0ee;
+  --color-lifted: #fcfbfa;
+  --color-white: #ffffff;
+  --color-ink: #141413;
+  --color-ink-hover: #2b2b28;
+  --color-muted: #555555;
+  --color-accent: #f37338;
+  --color-link: #3860be;
+  --color-link-hover: #2c4c99;
+  --color-monogram: #d1cdc7;
+  --color-hairline: rgba(20, 20, 19, 0.12);
+  --color-field: rgba(20, 20, 19, 0.5);
+  --color-scrim: rgba(20, 20, 19, 0.45);
 
-  --font-display: var(--font-spectral), Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-public-sans), system-ui, -apple-system, sans-serif;
-  --font-mono: var(--font-plex-mono), Consolas, monospace;
+  /* legacy aliases */
+  --color-ink-2: #141413;
+  --color-ink-3: #2b2b28;
+  --color-paper: #f3f0ee;
+  --color-card: #ffffff;
+  --color-line: rgba(20, 20, 19, 0.12);
+  --color-brass: #141413;
+  --color-brass-soft: #fcfbfa;
+  --color-signal: #141413;
+  --color-signal-dark: #2b2b28;
+
+  --font-sans: var(--font-sofia), "Sofia Sans", Arial, sans-serif;
+  --font-display: var(--font-sofia), "Sofia Sans", Arial, sans-serif;
+  --font-mono: var(--font-sofia), "Sofia Sans", Arial, sans-serif;
+
+  --shadow-nav: 0 4px 24px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 24px 48px rgba(0, 0, 0, 0.08);
+  --shadow-ink: 0 32px 64px rgba(20, 20, 19, 0.28);
+
+  --radius-btn: 20px;
+  --radius-mobile: 28px;
+  --radius-card: 40px;
+
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 html {
@@ -23,10 +51,85 @@ html {
 }
 
 body {
-  background: var(--color-paper);
+  background: var(--color-canvas);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  font-weight: 450;
+  font-size: 16px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Inside @layer base so Tailwind utilities (text-ink, text-white) win. */
+@layer base {
+  a {
+    color: var(--color-link);
+  }
+  a:hover {
+    color: var(--color-link-hover);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+}
+
+/* ── Motion ──────────────────────────────────────────────────────────── */
+
+/* Hero carousel. Each column's image set is duplicated in the DOM and the
+   column travels exactly one set length plus half the gap, so the loop is
+   seamless. --mg is half the column gap (10px desktop, 6px mobile). */
+@keyframes mosaic-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-50% - var(--mg)));
+  }
+}
+@keyframes mosaic-down {
+  from {
+    transform: translateY(calc(-50% - var(--mg)));
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.mosaic {
+  --mg: 6px;
+  --dur-up: 34s;
+  --dur-down: 29s;
+}
+@media (min-width: 768px) {
+  .mosaic {
+    --mg: 10px;
+    --dur-up: 44s;
+    --dur-down: 38s;
+  }
+}
+.mosaic-col {
+  will-change: transform;
+}
+.mosaic-up {
+  animation: mosaic-up var(--dur-up) linear infinite;
+}
+.mosaic-down {
+  animation: mosaic-down var(--dur-down) linear infinite;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.live-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -40,208 +143,469 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
-
-@keyframes pulse-dot {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.35;
+  .mosaic-up,
+  .mosaic-down {
+    animation: none !important;
   }
 }
 
-.live-dot {
-  animation: pulse-dot 2s ease-in-out infinite;
-}
+/* ── Type scale ──────────────────────────────────────────────────────── */
+@layer components {
+  .h1 {
+    font-size: clamp(38px, 5.2vw, 64px);
+    line-height: 1.02;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    text-wrap: pretty;
+  }
+  .h1-page {
+    font-size: clamp(34px, 4.4vw, 54px);
+    line-height: 1.06;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    text-wrap: pretty;
+  }
+  .h2 {
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    text-wrap: pretty;
+  }
+  .h2-sm {
+    font-size: clamp(26px, 3vw, 36px);
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    text-wrap: pretty;
+  }
+  .h3 {
+    font-size: 22px;
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .stat {
+    font-size: clamp(40px, 5vw, 60px);
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .lead {
+    font-size: 17px;
+    line-height: 1.5;
+    font-weight: 450;
+  }
 
-:focus-visible {
-  outline: 2px solid var(--color-brass);
-  outline-offset: 2px;
+  /* Eyebrow: 13px, bold, uppercase, preceded by the one orange dot. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex: 0 0 auto;
+  }
+  /* Same scale without the dot, for card labels. */
+  .label {
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  /* ── Buttons ─────────────────────────────────────────────────────── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 10px 28px;
+    border-radius: var(--radius-btn);
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    cursor: pointer;
+    border: 0;
+    transition:
+      background-color 220ms var(--ease-soft),
+      color 220ms var(--ease-soft),
+      transform 120ms var(--ease-soft);
+  }
+  .btn:hover {
+    text-decoration: none;
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: default;
+    transform: none;
+  }
+  .btn-primary {
+    background: var(--color-ink);
+    color: #ffffff;
+  }
+  .btn-primary:hover {
+    background: var(--color-ink-hover);
+    color: #ffffff;
+  }
+  .btn-secondary {
+    background: #ffffff;
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 1.5px var(--color-ink);
+  }
+  .btn-secondary:hover {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+  }
+  /* Cream pill on an ink surface. */
+  .btn-cream {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+  }
+  .btn-cream:hover {
+    background: #ffffff;
+    color: var(--color-ink);
+  }
+  .btn-lg {
+    min-height: 56px;
+    padding: 14px 32px;
+    font-size: 17px;
+  }
+
+  /* ── Chips ───────────────────────────────────────────────────────── */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: background-color 220ms var(--ease-soft);
+  }
+  .chip-outline {
+    box-shadow: inset 0 0 0 1.5px var(--color-ink);
+    background: transparent;
+  }
+  a.chip-outline:hover {
+    background: #ffffff;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .chip-ink {
+    background: var(--color-ink);
+    color: #ffffff;
+  }
+  a.chip-ink:hover {
+    background: var(--color-ink-hover);
+    color: #ffffff;
+    text-decoration: none;
+  }
+  .chip-sm {
+    min-height: 36px;
+    padding: 6px 14px;
+    font-size: 13px;
+  }
+
+  /* ── Cards and panels ─────────────────────────────────────────────── */
+  .card {
+    background: #ffffff;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: 36px;
+  }
+  .card-lifted {
+    background: var(--color-lifted);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: 36px;
+  }
+  .card-ink {
+    background: var(--color-ink);
+    color: #ffffff;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-ink);
+    padding: 36px;
+  }
+  .panel {
+    background: var(--color-lifted);
+    border-radius: var(--radius-card);
+    padding: clamp(48px, 6vw, 96px) clamp(24px, 4vw, 64px);
+  }
+  @media (max-width: 767px) {
+    .card,
+    .card-lifted,
+    .card-ink {
+      border-radius: var(--radius-mobile);
+      padding: 24px 20px;
+    }
+    .panel {
+      border-radius: var(--radius-mobile);
+      padding: 28px 20px;
+    }
+  }
+
+  /* ── Form fields ─────────────────────────────────────────────────── */
+  .field-label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+  .field {
+    display: block;
+    width: 100%;
+    min-height: 52px;
+    padding: 13px 24px;
+    border: 1px solid var(--color-field);
+    border-radius: 999px;
+    background: #ffffff;
+    color: var(--color-ink);
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 450;
+    outline: none;
+  }
+  .field::placeholder {
+    color: rgba(85, 85, 85, 0.7);
+  }
+  .field:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+  select.field {
+    appearance: none;
+    padding-right: 48px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23141413' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+  }
+  .field-textarea {
+    border-radius: 20px;
+    padding: 16px 24px;
+    resize: vertical;
+    min-height: 140px;
+  }
+  .field-hint {
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--color-muted);
+  }
+  .field-error {
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 auto;
+    margin-top: 2px;
+    border-radius: 6px;
+    accent-color: var(--color-ink);
+  }
+
+  /* ── Hairline rule ───────────────────────────────────────────────── */
+  .rule {
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  /* ── Legacy primitives, remapped so untouched pages match the system ── */
+  .pill {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-btn);
+    padding: 0.7rem 1.25rem;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    transition:
+      background-color 220ms var(--ease-soft),
+      color 220ms var(--ease-soft);
+  }
+  .pill:hover {
+    text-decoration: none;
+  }
+  .pill-primary {
+    background: var(--color-ink);
+    color: #fff;
+  }
+  .pill-primary:hover {
+    background: var(--color-ink-hover);
+    color: #fff;
+  }
+  .pill-outline {
+    box-shadow: inset 0 0 0 1.5px var(--color-ink);
+    color: var(--color-ink);
+    background: #fff;
+  }
+  .pill-outline:hover {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+  }
+  .frame {
+    border: 1px solid var(--color-hairline);
+    border-radius: 20px;
+  }
+  .kicker {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .pb-sticky {
+    padding-bottom: 5.5rem;
+  }
+  .field-pill {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid var(--color-field);
+    border-radius: 999px;
+    padding: 0.7rem 1.25rem;
+    font-size: 15px;
+    background: #fff;
+    color: var(--color-ink);
+    font-family: inherit;
+  }
+  .field-pill::placeholder {
+    color: rgba(85, 85, 85, 0.7);
+  }
+  .field-area {
+    width: 100%;
+    min-height: 64px;
+    border: 1px solid var(--color-field);
+    border-radius: 20px;
+    padding: 0.8rem 1.25rem;
+    font-size: 15px;
+    background: #fff;
+    color: var(--color-ink);
+    font-family: inherit;
+  }
+  .field-area::placeholder {
+    color: rgba(85, 85, 85, 0.7);
+  }
+  .strip {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+  .strip::-webkit-scrollbar {
+    display: none;
+  }
+  .strip > * {
+    scroll-snap-align: start;
+    flex: none;
+  }
 }
 
 /* Markdown article body (news posts) */
 .article-body {
-  font-size: 1.0625rem;
-  line-height: 1.75;
-  color: var(--color-ink-2);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--color-ink);
 }
-
 .article-body p {
   margin-bottom: 1.25rem;
 }
-
 .article-body h2 {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
   margin: 2rem 0 0.75rem;
-  color: var(--color-ink);
 }
-
 .article-body h3 {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   margin: 1.5rem 0 0.5rem;
-  color: var(--color-ink);
 }
-
 .article-body ul,
 .article-body ol {
   margin: 0 0 1.25rem 1.35rem;
   list-style: disc;
 }
-
 .article-body ol {
   list-style: decimal;
 }
-
 .article-body li {
   margin-bottom: 0.4rem;
 }
-
-.article-body li::marker {
-  color: var(--color-brass);
-}
-
 .article-body strong {
-  color: var(--color-ink);
+  font-weight: 600;
 }
-
 .article-body a {
-  color: var(--color-ink);
+  color: var(--color-link);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
-@layer components {
-/* Wireframe 1a/1e primitives: pill buttons, framed boxes, sticky-bar spacing */
-.pill {
-  display: flex;
-  min-height: 46px;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border-radius: 999px;
-  padding: 0.75rem 1rem;
-  font-size: 0.9375rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
-}
-
-.pill-primary {
-  background: var(--color-signal);
-  color: #fff;
-}
-.pill-primary:hover { background: var(--color-signal-dark); }
-
-.pill-outline {
-  border: 1.75px solid var(--color-ink);
-  color: var(--color-ink);
-  background: var(--color-card);
-}
-.pill-outline:hover { background: var(--color-ink); color: #fff; }
-
-/* Frame stroke from the handoff: 1.5px, 14px radius */
-.frame {
-  border: 1.5px solid var(--color-ink);
-  border-radius: 14px;
-}
-
-.kicker {
-  font-family: var(--font-mono);
-  font-size: 0.53rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-}
-
-/* Reserve room so the fixed action bar never covers the last section */
-.pb-sticky { padding-bottom: 5.5rem; }
-
-/* Pill form fields, per the handoff's input treatment */
-.field-pill {
-  width: 100%;
-  min-height: 44px;
-  border: 1.5px solid var(--color-ink);
-  border-radius: 999px;
-  padding: 0.7rem 1rem;
-  font-size: 0.9rem;
-  background: #fff;
-  color: var(--color-ink);
-}
-.field-pill::placeholder { color: var(--color-muted); }
-.field-pill:focus { outline: 2px solid var(--color-brass); outline-offset: 2px; }
-
-.field-area {
-  width: 100%;
-  min-height: 64px;
-  border: 1.5px solid var(--color-ink);
-  border-radius: 14px;
-  padding: 0.7rem 1rem;
-  font-size: 0.9rem;
-  background: #fff;
-  color: var(--color-ink);
-}
-.field-area::placeholder { color: var(--color-muted); }
-.field-area:focus { outline: 2px solid var(--color-brass); outline-offset: 2px; }
-
-/* Horizontal chip/tab strip with snap */
-.strip {
-  display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  scrollbar-width: none;
-}
-.strip::-webkit-scrollbar { display: none; }
-.strip > * { scroll-snap-align: start; flex: none; }
-}
-
-/* Staggered practice-card reveal.
-   Each card rises in and the brass accent sweeps its border once, in
-   sequence, then settles so the normal hover state takes over. Runs a
-   single time when the row scrolls into view. */
+/* Staggered card reveal used by the legacy practice grid. */
 .reveal-cards > * {
   opacity: 0;
 }
-
 .reveal-cards.is-in > * {
-  animation: card-light 620ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: card-rise 620ms var(--ease-soft) forwards;
 }
-
-.reveal-cards.is-in > *:nth-child(1) { animation-delay: 0ms; }
-.reveal-cards.is-in > *:nth-child(2) { animation-delay: 95ms; }
-.reveal-cards.is-in > *:nth-child(3) { animation-delay: 190ms; }
-.reveal-cards.is-in > *:nth-child(4) { animation-delay: 285ms; }
-.reveal-cards.is-in > *:nth-child(5) { animation-delay: 380ms; }
-
-@keyframes card-light {
-  0% {
+.reveal-cards.is-in > *:nth-child(1) {
+  animation-delay: 0ms;
+}
+.reveal-cards.is-in > *:nth-child(2) {
+  animation-delay: 95ms;
+}
+.reveal-cards.is-in > *:nth-child(3) {
+  animation-delay: 190ms;
+}
+.reveal-cards.is-in > *:nth-child(4) {
+  animation-delay: 285ms;
+}
+.reveal-cards.is-in > *:nth-child(5) {
+  animation-delay: 380ms;
+}
+@keyframes card-rise {
+  from {
     opacity: 0;
     transform: translateY(10px);
   }
-  55% {
+  to {
     opacity: 1;
     transform: translateY(0);
-    /* the accent catches, then releases */
-    box-shadow:
-      0 0 0 1.5px var(--color-brass),
-      0 8px 22px -14px rgba(176, 141, 66, 0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    box-shadow: 0 0 0 0 transparent;
   }
 }
-
-/* Reduced motion: no movement, no sweep, nothing hidden. */
 @media (prefers-reduced-motion: reduce) {
   .reveal-cards > *,
   .reveal-cards.is-in > * {

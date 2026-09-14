@@ -300,15 +300,22 @@ export const CASE_TYPES: string[] = [
 
 /* ── Navigation ─────────────────────────────────────────────────────── */
 
-// Flat six-link nav, pinned on every page alongside the phone and the
-// accent "Free case review" button.
+// Three-link nav (plus Home, rendered by SiteNav) pinned in the white pill
+// on every page alongside the phone and the ink "Free case review" button.
 export const NAV_LINKS = [
   { href: "/practice", label: "Practice areas" },
   { href: "/attorneys", label: "Attorneys" },
-  { href: "/results", label: "Results" },
-  { href: "/news", label: "News" },
-  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
+] as const;
+
+// Everything else the site publishes, reachable from the footer.
+export const FOOTER_FIRM_LINKS = [
+  { href: "/attorneys", label: "Attorneys" },
+  { href: "/results", label: "Notable matters" },
+  { href: "/about", label: "About the firm" },
+  { href: "/news", label: "Legal news" },
+  { href: "/contact", label: "Contact and directions" },
+  { href: "/es", label: "Español" },
 ] as const;
 
 /* ── People ─────────────────────────────────────────────────────────── */

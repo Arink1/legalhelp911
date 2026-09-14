@@ -1,119 +1,100 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { TopBar, Footer } from "@/components/SiteChrome";
-import IntakeForm from "@/components/IntakeForm";
+import CaseReviewForm from "@/components/CaseReviewForm";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema";
-import PhotoSlot from "@/components/PhotoSlot";
-import { PhoneIcon, MailIcon, ChevronLeftIcon } from "@/components/Icons";
-import {
-  PHONE_DISPLAY,
-  PHONE_TEL,
-  FIRM_NAME,
-  OFFICE,
-  YEARS_IN_PRACTICE,
-} from "@/lib/site";
+import { PHONE_DISPLAY, PHONE_TEL, SITE_NAME, OFFICE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `Contact | ${FIRM_NAME}`,
-  description: `Call, text, or send the form. ${YEARS_IN_PRACTICE} years in practice, free consultation, we reply within one business hour.`,
+  title: `Free case review | ${SITE_NAME}`,
+  description: `Tell us what happened and we will tell you what the matter realistically involves. If there is a court date or a deadline, call ${PHONE_DISPLAY}. Phone intake is staffed 24 hours.`,
   alternates: { canonical: "/contact" },
 };
 
-/**
- * Wireframe 1g. Channel band first so nobody is forced into the form, then
- * a two-field start that reveals the rest once name and phone are filled.
- */
 export default function ContactPage() {
   return (
     <>
       <LocalBusinessSchema />
       <TopBar />
-      <main className="mx-auto w-full max-w-2xl px-4 py-6 sm:px-6">
-        {/* 1g opens with a back bar */}
-        <Link
-          href="/"
-          className="mb-5 inline-flex items-center gap-1.5 text-[13px] font-semibold text-muted hover:text-ink"
-        >
-          <ChevronLeftIcon className="h-4 w-4" />
-          Back
-        </Link>
-        <h1 className="font-display text-[26px] font-extrabold leading-[1.12] tracking-[-0.025em]">
-          Two ways to reach us. Pick the faster one.
-        </h1>
-
-        {/* Channel band: call is primary, form is the alternative */}
-        <div className="mt-6 grid grid-cols-2 gap-2">
-          <a
-            href={PHONE_TEL}
-            data-analytics="call_tap_contact"
-            className="pill pill-primary flex-col gap-1 py-3 text-[13px]"
-          >
-            <PhoneIcon className="h-5 w-5" />
-            Call
-          </a>
-          <a href="#form" className="pill pill-outline flex-col gap-1 py-3 text-[13px]">
-            <MailIcon className="h-5 w-5" />
-            Form
-          </a>
-        </div>
-        <p className="mt-2 text-center text-[11px] text-muted">
-          Calling is fastest. We answer 24/7.
-        </p>
-
-        {/* Short form */}
-        <section id="form" className="frame mt-8 bg-card p-5 sm:p-6">
-          <h2 className="font-display text-xl font-extrabold tracking-[-0.02em]">
-            Send us the basics
-          </h2>
-          <p className="mt-1 text-[12.5px] text-muted">
-            Two fields to start. We ask for more only if it helps.
-          </p>
-          <div className="mt-4">
-            <IntakeForm />
-          </div>
-        </section>
-
-        {/* Office and hours */}
-        <section className="mt-8">
-          <h2 className="font-display text-xl font-extrabold tracking-[-0.02em]">
-            Office &amp; hours
-          </h2>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <div className="frame p-4 text-[13px] leading-relaxed text-muted">
-              <p className="font-semibold text-ink">{FIRM_NAME}</p>
-              <address className="mt-1 not-italic">
-                {OFFICE.street}
-                <br />
-                {OFFICE.city}, {OFFICE.region} {OFFICE.postalCode}
-              </address>
-              <p className="mt-2 text-[12.5px]">{OFFICE.perks.join(" · ")}</p>
-              <p className="mt-3 font-semibold text-ink">Hours</p>
-              {OFFICE.hours.map(([k, v]) => (
-                <p key={k}>
-                  {k}: {v}
-                </p>
-              ))}
-              <p className="mt-2 text-[12.5px]">{OFFICE.afterHours}</p>
-              <a
-                href={PHONE_TEL}
-                className="mt-3 inline-flex items-center gap-2 font-mono text-sm font-semibold text-ink hover:text-signal"
-              >
-                <PhoneIcon className="h-4 w-4" />
-                {PHONE_DISPLAY}
-              </a>
+      <main>
+        <section className="px-5 pb-16 pt-12 sm:px-6 md:pb-[clamp(64px,8vw,112px)] md:pt-[72px]">
+          <div className="mx-auto max-w-[1280px]">
+            <div className="max-w-[720px]">
+              <p className="eyebrow">Free case review</p>
+              <h1 className="h1-page mb-4 mt-6">Tell us what happened</h1>
+              <p className="lead">
+                Two minutes now, and we will tell you what the matter
+                realistically involves. If there is a court date or a deadline,
+                call{" "}
+                <a
+                  href={PHONE_TEL}
+                  data-analytics="call_tap_contact_intro"
+                  className="font-medium text-ink"
+                >
+                  {PHONE_DISPLAY}
+                </a>{" "}
+                instead. Phone intake is staffed 24 hours.
+              </p>
             </div>
-            <a
-              href={OFFICE.directionsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <PhotoSlot
-                label="Our building, get directions"
-                src="/media/office-exterior.webp"
-                className="min-h-[180px] w-full"
-              />
-            </a>
+
+            <div className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] items-start gap-6 md:mt-14 md:gap-8">
+              <CaseReviewForm />
+
+              <div className="flex flex-col gap-6">
+                <div className="card-ink md:p-10">
+                  <p className="text-[13px] font-bold uppercase leading-none tracking-[0.04em] text-white/70">
+                    Urgent right now
+                  </p>
+                  <h2 className="mb-3 mt-4 text-[26px] font-medium leading-[1.15] tracking-[-0.02em] text-white">
+                    Call {PHONE_DISPLAY}
+                  </h2>
+                  <p className="mb-6 text-[15px] leading-normal text-white/80">
+                    A hearing tomorrow, an arrest, a warrant, or a lawsuit you
+                    have just been served: call rather than typing. Phone intake
+                    runs 24 hours. {OFFICE.afterHours} Jail visits are available.
+                  </p>
+                  <a
+                    href={PHONE_TEL}
+                    data-analytics="call_tap_contact_urgent"
+                    className="btn btn-cream w-full sm:w-auto"
+                  >
+                    Call now
+                  </a>
+                </div>
+
+                <div className="card-lifted md:p-10">
+                  <h2 className="mb-5 text-[20px] font-medium leading-[1.2] tracking-[-0.01em]">
+                    The office
+                  </h2>
+                  <address className="mb-4 text-[15px] not-italic leading-normal">
+                    {OFFICE.street}
+                    <br />
+                    {OFFICE.city}, {OFFICE.region} {OFFICE.postalCode}
+                    <br />
+                    {OFFICE.county}
+                  </address>
+                  <p className="mb-4 text-[15px] leading-normal text-muted">
+                    {OFFICE.hours[0][1]}. {OFFICE.hours[1][0]} by appointment.{" "}
+                    {OFFICE.perks.join(". ")}.
+                  </p>
+                  <p className="text-[15px] leading-normal">
+                    <a
+                      href={OFFICE.directionsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Get directions
+                    </a>
+                  </p>
+                </div>
+
+                <p className="text-[13px] leading-normal text-muted">
+                  Please do not send confidential or time-critical details
+                  through this form. Until a representation agreement is signed,
+                  no attorney-client relationship exists and no work is being
+                  done on your behalf.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
       </main>

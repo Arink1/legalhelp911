@@ -1,7 +1,8 @@
 "use client";
 
+import ScalesMark from "@/components/ScalesMark";
 import { useEffect, useRef, useState } from "react";
-import { FIRM_NAME, SITE_NAME } from "@/lib/site";
+import { FIRM_NAME } from "@/lib/site";
 
 type Status = "idle" | "submitting" | "done" | "error";
 
@@ -127,14 +128,7 @@ export default function NewsletterSignup({
             </div>
 
             <div className="min-h-0 min-w-0 overflow-auto p-6 sm:p-[clamp(32px,4vw,48px)]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/media/logo-icon.png"
-                alt={SITE_NAME}
-                width={256}
-                height={234}
-                className="block h-12 w-auto rounded-[12px] sm:h-14 sm:rounded-[14px]"
-              />
+              <ScalesMark className="w-12 sm:w-14" />
 
               {status === "done" ? (
                 <>

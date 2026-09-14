@@ -614,3 +614,170 @@ body {
     transform: none;
   }
 }
+
+/* ── Brand mark and logo animation ───────────────────────────────────
+   The scales mark is the supplied icon cut into five clip-path layers so
+   the crossbar and trays can tip on a pivot while the post and base stay
+   planted. The intro is the "Balance" reveal from the logo handoff.
+   Rules live in @layer components so Tailwind utilities (absolute, w-*)
+   still win on the same element. */
+@layer components {
+  .mark {
+    position: relative;
+    display: block;
+    aspect-ratio: 606 / 573;
+    flex: 0 0 auto;
+    --tip: 7deg;
+    --weigh: 7s;
+  }
+  .mark > i {
+    position: absolute;
+    inset: 0;
+    background: url("/media/logo-mark.webp") center / 100% 100% no-repeat;
+  }
+  .mark > .arm {
+    transform-origin: 49.8% 21.5%;
+  }
+  .mark-live > .arm {
+    animation: mark-weigh var(--weigh) ease-in-out infinite;
+  }
+  .mark-white > i {
+    filter: brightness(0) invert(1);
+  }
+  .mark-ink > i {
+    filter: brightness(0);
+    opacity: 0.92;
+  }
+
+  /* Lockup: pieces sized in em so one font-size sets the logo height. */
+  .lockup {
+    display: inline-flex;
+    align-items: center;
+    height: 1em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .lockup-mark {
+    width: 1.0576em;
+    height: 1em;
+  }
+  .lockup-word,
+  .lockup-911 {
+    display: block;
+    height: 1em;
+    width: auto;
+  }
+  .lockup-word {
+    margin-left: 0.124em;
+  }
+  .lockup-911 {
+    margin-left: 0.0227em;
+  }
+
+  /* Intro overlay */
+  .intro {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    background: var(--color-canvas);
+    cursor: pointer;
+    animation: intro-out 0.55s var(--ease-soft) 3.1s both;
+  }
+  .intro-stage {
+    position: relative;
+    font-size: clamp(44px, 14vw, 112px);
+    animation: intro-zoom 0.7s var(--ease-soft) 3s both;
+  }
+  .intro-lockup {
+    font-size: 1em;
+  }
+  .intro .lockup-mark {
+    transform-origin: 50% 100%;
+    animation: intro-drop 1.9s var(--ease-soft) both;
+  }
+  .intro .lockup-word {
+    animation: intro-wipe 1.1s var(--ease-soft) 1.15s both;
+  }
+  .intro .lockup-911 {
+    animation: intro-stamp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 2.25s both;
+  }
+  .intro-ring {
+    position: absolute;
+    top: 50%;
+    right: 0.3em;
+    width: 1.5em;
+    height: 1.5em;
+    margin: -0.75em -0.75em 0 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(225, 33, 40, 0.3), rgba(225, 33, 40, 0) 70%);
+    pointer-events: none;
+    animation: intro-ring 0.85s ease-out 2.25s both;
+  }
+  .intro-ring-2 {
+    animation-delay: 2.55s;
+  }
+  .intro-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.22em;
+    height: 2px;
+    background: #1c3f68;
+    opacity: 0.16;
+    transform-origin: 50% 50%;
+    animation: intro-line 0.9s var(--ease-soft) 0.95s both;
+  }
+}
+
+@keyframes mark-weigh {
+  0% { transform: rotate(0deg); }
+  18% { transform: rotate(calc(var(--tip) * -1)); }
+  36% { transform: rotate(calc(var(--tip) * -0.15)); }
+  55% { transform: rotate(var(--tip)); }
+  72% { transform: rotate(calc(var(--tip) * -0.3)); }
+  86% { transform: rotate(calc(var(--tip) * 0.1)); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes intro-drop {
+  0% { opacity: 0; transform: translateY(-45%) rotate(-13deg) scale(1.22); }
+  25% { opacity: 1; }
+  42% { transform: translateY(0) rotate(6deg) scale(1.04); }
+  56% { transform: rotate(-3.4deg) scale(1); }
+  70% { transform: rotate(1.6deg); }
+  84% { transform: rotate(-0.6deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes intro-wipe {
+  from { clip-path: inset(-10% 100% -10% 0); transform: translateX(-5%); }
+  to { clip-path: inset(-10% 0 -10% 0); transform: translateX(0); }
+}
+@keyframes intro-stamp {
+  from { opacity: 0; transform: scale(0.5); }
+  30% { opacity: 1; }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes intro-ring {
+  from { opacity: 0; transform: scale(0.6); }
+  20% { opacity: 1; }
+  to { opacity: 0; transform: scale(2.4); }
+}
+@keyframes intro-line {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes intro-zoom {
+  to { transform: scale(1.06); }
+}
+@keyframes intro-out {
+  to { opacity: 0; visibility: hidden; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mark-live > .arm {
+    animation: none !important;
+  }
+  .intro {
+    display: none !important;
+  }
+}

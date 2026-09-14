@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { TopBar, Footer } from "@/components/SiteChrome";
 import { ChevronRightIcon } from "@/components/Icons";
+import ScalesMark from "@/components/ScalesMark";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/site";
 
 export type Crumb = { href?: string; label: string };
@@ -48,7 +49,8 @@ export default function FirmPage({
                 ))}
               </ol>
             </nav>
-            <h1 className="h1-page mt-6 max-w-[840px]">{title}</h1>
+            <ScalesMark className="mt-8 w-14 md:w-[72px]" />
+            <h1 className="h1-page mt-5 max-w-[840px]">{title}</h1>
             {intro && <p className="lead mt-5 max-w-[620px]">{intro}</p>}
             {aside}
           </div>
@@ -59,8 +61,9 @@ export default function FirmPage({
         </section>
 
         <section className="px-3 pb-16 sm:px-6 md:pb-[clamp(64px,8vw,128px)]">
-          <div className="mx-auto grid max-w-[1280px] grid-cols-[repeat(auto-fit,minmax(300px,1fr))] items-center gap-10 rounded-[28px] bg-lifted px-6 py-10 md:rounded-[40px] md:px-[clamp(28px,4vw,72px)] md:py-[clamp(48px,6vw,88px)]">
-            <h2 className="h2 max-w-[520px]">{ctaTitle}</h2>
+          <div className="relative mx-auto grid max-w-[1280px] grid-cols-[repeat(auto-fit,minmax(300px,1fr))] items-center gap-10 overflow-hidden rounded-[28px] bg-lifted px-6 py-10 md:rounded-[40px] md:px-[clamp(28px,4vw,72px)] md:py-[clamp(48px,6vw,88px)]">
+            <ScalesMark className="pointer-events-none absolute -right-8 -top-10 w-[200px] opacity-[0.12] md:-right-4 md:w-[300px]" />
+            <h2 className="h2 relative max-w-[520px]">{ctaTitle}</h2>
             <div className="flex flex-col gap-5 md:justify-self-start">
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
                 <Link href="/contact" className="btn btn-primary btn-lg">

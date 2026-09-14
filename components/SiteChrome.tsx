@@ -1,3 +1,5 @@
+import LogoLockup from "@/components/LogoLockup";
+import ScalesMark from "@/components/ScalesMark";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import NewsletterSignup from "@/components/NewsletterSignup";
@@ -28,8 +30,12 @@ const footerLink =
 
 export function Footer() {
   return (
-    <footer className="bg-ink px-6 pb-[max(80px,env(safe-area-inset-bottom))] pt-16 text-white sm:pb-[120px] sm:pt-[100px]">
-      <div className="mx-auto max-w-[1280px]">
+    <footer className="relative overflow-hidden bg-ink px-6 pb-[max(80px,env(safe-area-inset-bottom))] pt-16 text-white sm:pb-[120px] sm:pt-[100px]">
+      <ScalesMark
+        tone="white"
+        className="pointer-events-none absolute -right-10 top-8 w-[220px] opacity-[0.1] sm:w-[320px] lg:right-6"
+      />
+      <div className="relative mx-auto max-w-[1280px]">
         <div className="flex flex-wrap items-end justify-between gap-8">
           <h2 className="h2 max-w-[520px] text-white">
             Someone answers, 24 hours a day
@@ -137,15 +143,8 @@ export function Footer() {
         <div className="my-8 h-px bg-white/30 sm:mb-8 sm:mt-16" />
 
         <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-          <span className="inline-flex items-center rounded-full bg-white px-[18px] py-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/media/logo-lockup.png"
-              alt={SITE_NAME}
-              width={900}
-              height={236}
-              className="block h-[22px] w-auto"
-            />
+          <span className="inline-flex items-center rounded-full bg-white px-5 py-2.5">
+            <LogoLockup className="text-[28px] sm:text-[32px]" />
           </span>
           <span className="text-[13px] text-white/60">
             &copy; {new Date().getFullYear()} {FIRM_NAME}

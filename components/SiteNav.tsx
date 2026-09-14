@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import LogoLockup from "@/components/LogoLockup";
 import {
   NAV_LINKS,
   PHONE_DISPLAY,
@@ -58,21 +59,14 @@ export default function SiteNav({ over: _over = false }: { over?: boolean }) {
       <header className="sticky top-3 z-40 px-3 pt-3 sm:top-6 sm:px-6 sm:pt-6">
         <nav
           aria-label="Main"
-          className="mx-auto flex max-w-[1280px] items-center justify-between gap-3 rounded-full bg-white py-2 pl-4 pr-2 shadow-nav sm:gap-6 sm:py-3 sm:pl-7 sm:pr-5"
+          className="mx-auto flex max-w-[1280px] items-center justify-between gap-3 rounded-full bg-white py-2.5 pl-4 pr-2 shadow-nav sm:gap-6 sm:py-3 sm:pl-6 sm:pr-5"
         >
           <Link
             href="/"
             aria-label={`${SITE_NAME} home`}
             className="flex shrink-0 items-center"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/media/logo-lockup.png"
-              alt={SITE_NAME}
-              width={900}
-              height={236}
-              className="block h-6 w-auto sm:h-9"
-            />
+            <LogoLockup className="text-[30px] sm:text-[40px] lg:text-[52px]" />
           </Link>
 
           <ul className="hidden items-center gap-1 lg:flex">

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { PhoneIcon, CheckIcon, ChevronRightIcon } from "@/components/Icons";
 import PhotoSlot from "@/components/PhotoSlot";
+import ScalesMark from "@/components/ScalesMark";
 import { PHONE_DISPLAY, PHONE_TEL, ATTORNEYS } from "@/lib/site";
 
 /**
@@ -38,8 +39,9 @@ export default function ThankYouPanel() {
       data-analytics="lead_submitted"
       className="mx-auto flex w-full max-w-md flex-col items-center px-4 py-10 text-center sm:px-6"
     >
-      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brass">
-        <CheckIcon className="h-7 w-7 text-white" />
+      <ScalesMark className="w-20" />
+      <div className="mt-4 flex h-9 w-9 items-center justify-center rounded-full bg-brass">
+        <CheckIcon className="h-4 w-4 text-white" />
       </div>
 
       <h1 className="mt-5 font-display text-[26px] font-extrabold leading-tight tracking-[-0.025em]">

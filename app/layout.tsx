@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sofia_Sans } from "next/font/google";
 import "./globals.css";
+import LogoIntro from "@/components/LogoIntro";
 
 // One family for the whole site. Sofia Sans is the open substitute for the
 // design's MarkForMC, and it is variable, which matters because body copy
@@ -31,7 +32,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={sofia.variable}>
-      <body>{children}</body>
+      <body>
+        <LogoIntro />
+        {children}
+      </body>
     </html>
   );
 }

@@ -116,6 +116,63 @@ export default function Home() {
         {/* ── Stats ────────────────────────────────────────────────── */}
         <section className="px-5 pb-6 sm:px-6">
           <div className="rule mx-auto max-w-[1280px] pt-10 md:pt-16">
+            {/* Principal attorney: centered portrait and short bio, above the stats. */}
+            {principal && (
+              <div className="mx-auto mb-14 flex max-w-[640px] flex-col items-center text-center md:mb-20">
+                {principal.photo ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={principal.photo}
+                    alt={`${principal.name.replace(", Esq.", "")}, ${principal.role}`}
+                    width={800}
+                    height={1000}
+                    loading="lazy"
+                    decoding="async"
+                    className="block aspect-[4/5] w-full max-w-[280px] rounded-[28px] object-cover object-top md:max-w-[320px] md:rounded-[40px]"
+                  />
+                ) : null}
+                <p className="eyebrow mt-8">Principal attorney</p>
+                <h2 className="mb-1 mt-4 text-[28px] font-medium leading-[1.15] tracking-[-0.02em] md:text-[34px]">
+                  {principal.name}
+                </h2>
+                <p className="mb-5 text-[15px] font-medium text-muted">
+                  {principal.role}
+                </p>
+                <p className="max-w-[560px] text-[16px] leading-normal">
+                  {principal.bio}
+                </p>
+                {principal.badges.length > 0 && (
+                  <ul className="mt-6 flex flex-wrap justify-center gap-2">
+                    {principal.badges.map((b) => (
+                      <li key={b} className="chip chip-outline chip-sm">
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <p className="mt-7">
+                  <Link
+                    href={`/attorneys/${principal.slug}`}
+                    className="inline-flex items-center gap-2 text-[15px] font-medium"
+                  >
+                    Full profile
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="14"
+                      height="14"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </Link>
+                </p>
+              </div>
+            )}
             <p className="mb-8 text-center text-[16px] leading-[1.4] text-muted md:mb-12">
               What the firm offers every caller
             </p>
@@ -133,68 +190,6 @@ export default function Home() {
                 </div>
               ))}
             </div>
-
-            {/* Principal attorney: photo and short bio, under the stats. */}
-            {principal && (
-              <div className="mt-14 grid items-center gap-x-16 gap-y-8 md:mt-20 md:grid-cols-[minmax(0,340px)_minmax(0,1fr)]">
-                <div className="min-w-0">
-                  {principal.photo ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={principal.photo}
-                      alt={`${principal.name.replace(", Esq.", "")}, ${principal.role}`}
-                      width={800}
-                      height={1000}
-                      loading="lazy"
-                      decoding="async"
-                      className="block aspect-[4/5] w-full max-w-[340px] rounded-[28px] object-cover object-top md:rounded-[40px]"
-                    />
-                  ) : null}
-                </div>
-                <div className="min-w-0">
-                  <p className="eyebrow">Principal attorney</p>
-                  <h2 className="mb-1 mt-4 text-[28px] font-medium leading-[1.15] tracking-[-0.02em] md:text-[34px]">
-                    {principal.name}
-                  </h2>
-                  <p className="mb-5 text-[15px] font-medium text-muted">
-                    {principal.role}
-                  </p>
-                  <p className="max-w-[560px] text-[16px] leading-normal">
-                    {principal.bio}
-                  </p>
-                  {principal.badges.length > 0 && (
-                    <ul className="mt-6 flex flex-wrap gap-2">
-                      {principal.badges.map((b) => (
-                        <li key={b} className="chip chip-outline chip-sm">
-                          {b}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  <p className="mt-7">
-                    <Link
-                      href={`/attorneys/${principal.slug}`}
-                      className="inline-flex items-center gap-2 text-[15px] font-medium"
-                    >
-                      Full profile
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="14"
-                        height="14"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden="true"
-                      >
-                        <path d="M5 12h14M13 6l6 6-6 6" />
-                      </svg>
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            )}
           </div>
         </section>
 

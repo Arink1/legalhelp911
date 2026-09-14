@@ -21,11 +21,13 @@ export default function AttorneysIndex() {
         {ATTORNEYS.map((a) => (
           <li key={a.slug} className="frame bg-card p-4">
             <Link href={`/attorneys/${a.slug}`} className="group block">
-              <PhotoSlot
-                label="Attorney portrait"
-                src={a.photo}
-                className="aspect-[4/5] w-full"
-              />
+              {a.photo && (
+                <PhotoSlot
+                  label="Attorney portrait"
+                  src={a.photo}
+                  className="aspect-[4/5] w-full"
+                />
+              )}
               <p className="mt-3 font-display text-lg font-bold group-hover:text-ink-3">
                 {a.name}
               </p>
@@ -47,9 +49,6 @@ export default function AttorneysIndex() {
           </li>
         ))}
       </ul>
-      <p className="mt-6 text-[12.5px] text-muted">
-        Headshots and direct lines are still to come from the firm.
-      </p>
     </FirmPage>
   );
 }

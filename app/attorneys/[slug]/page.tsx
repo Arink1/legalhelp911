@@ -48,13 +48,15 @@ export default async function AttorneyBio({ params }: Params) {
     >
       <div className="grid gap-8 lg:grid-cols-[1fr_1.5fr]">
         <div>
-          <PhotoSlot
-            label="Attorney portrait"
-            src={a.photo}
-            className="aspect-[4/5] w-full"
-          />
+          {a.photo && (
+            <PhotoSlot
+              label="Attorney portrait"
+              src={a.photo}
+              className="aspect-[4/5] w-full"
+            />
+          )}
           {a.badges.length > 0 && (
-            <ul className="mt-4 flex flex-wrap gap-2">
+            <ul className={`flex flex-wrap gap-2 ${a.photo ? "mt-4" : ""}`}>
               {a.badges.map((b) => (
                 <li
                   key={b}

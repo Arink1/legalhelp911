@@ -6,10 +6,9 @@ export const FIRM_NAME = "Law Offices of Tyler A. Trumbach, P.A.";
 /** Shorter form for tight spots like nav and card headings. */
 export const FIRM_SHORT = "Trumbach Law";
 
-// TODO: replace all three with the firm's real numbers before launch.
-export const PHONE_DISPLAY = "(800) 555-0911";
-export const PHONE_TEL = "tel:+18005550911";
-export const SMS_LINK = "sms:+18005550911";
+export const PHONE_DISPLAY = "(954) 444-6209";
+export const PHONE_TEL = "tel:+19544446209";
+export const SMS_LINK = "sms:+19544446209";
 
 // TODO: confirm with the firm. This is the one hard number the site claims,
 // so it must be right. The handoff lists 38 years and free consultation as
@@ -349,7 +348,6 @@ export type Attorney = {
 // a named attorney on a live law-firm site would present a fabricated person
 // as real, which is misleading to consumers and a bar-advertising problem in
 // most states. Swap in real headshots before this site takes traffic.
-const PLACEHOLDER_PORTRAIT = "/media/attorney-placeholder.webp";
 export const ATTORNEYS: Attorney[] = [
   {
     slug: "tyler-trumbach",

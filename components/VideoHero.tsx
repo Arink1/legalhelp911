@@ -16,12 +16,11 @@ type Props = {
  *
  * The poster still is the LCP element: it renders in the markup immediately
  * and the video is only mounted afterwards, and only when it is appropriate
- * to spend the bytes. Per the handoff these cases get the poster and no
- * video fetch at all:
- *   - viewport under 600px
+ * to spend the bytes. These cases get the poster and no video fetch at all:
  *   - prefers-reduced-motion: reduce
- *   - Save-Data enabled, or a 2g/3g effective connection
+ *   - Save-Data enabled, or a slow-2g/2g effective connection
  *   - any decode or load failure
+ * Phones play the clip too: it is small, muted, and inline.
  */
 export default function VideoHero({
   clip,
@@ -36,7 +35,6 @@ export default function VideoHero({
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const smallViewport = window.innerWidth < 600;
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
@@ -49,9 +47,9 @@ export default function VideoHero({
     ).connection;
     const thinPipe =
       Boolean(conn?.saveData) ||
-      ["slow-2g", "2g", "3g"].includes(conn?.effectiveType ?? "");
+      ["slow-2g", "2g"].includes(conn?.effectiveType ?? "");
 
-    if (smallViewport || reducedMotion || thinPipe) return;
+    if (reducedMotion || thinPipe) return;
     setPlayVideo(true);
   }, []);
 
@@ -92,7 +90,7 @@ export default function VideoHero({
           muted
           loop
           playsInline
-          preload="none"
+          preload="auto"
           aria-hidden="true"
           tabIndex={-1}
           onError={() => setFailed(true)}

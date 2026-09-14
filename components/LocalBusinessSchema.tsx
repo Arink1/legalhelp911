@@ -4,9 +4,7 @@ import { OFFICE, FIRM_NAME, PHONE_DISPLAY, YEARS_IN_PRACTICE, PRACTICE_AREAS } f
  * LocalBusiness / LegalService structured data, emitted with the firm's real
  * address so the office shows up in local search and map results.
  *
- * TODO: `telephone` is still the placeholder number and must be the firm's
- * real line before launch. Wrong structured data is worse than none, because
- * search engines will publish it.
+ * `telephone` reads the firm's real line from lib/site.ts.
  */
 export default function LocalBusinessSchema() {
   const data = {

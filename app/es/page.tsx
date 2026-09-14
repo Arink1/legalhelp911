@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import VideoHero from "@/components/VideoHero";
 import StickyActionBar from "@/components/StickyActionBar";
-import PhotoSlot from "@/components/PhotoSlot";
 import { Footer } from "@/components/SiteChrome";
 import { PhoneIcon, MessageIcon } from "@/components/Icons";
 import {
@@ -102,11 +101,6 @@ export default function EspanolPage() {
             not a flag icon. Jesmany Jomarron is Of Counsel and bilingual. */}
         <section className="border-b border-line bg-card">
           <div className="mx-auto flex max-w-2xl items-center gap-4 px-4 py-7 sm:px-6 lg:max-w-4xl">
-            <PhotoSlot
-              label="Abogado"
-              className="h-[72px] w-[72px] shrink-0"
-              rounded="rounded-full"
-            />
             <div>
               <p className="kicker">Quien le atiende en espanol</p>
               <p className="mt-1.5 font-display text-lg font-bold">

@@ -34,9 +34,7 @@ Supabase**, verified end to end from the live site.
 
 Still to do:
 
-1. **Phone number**: `lib/site.ts` still has the placeholder
-   (800) 555-0911. Replace `PHONE_DISPLAY` and `PHONE_TEL`, ideally with a
-   call tracking number.
+1. **Phone number**: set to (954) 444-6209 in `lib/site.ts` on 2026-09-13.
 2. **Domain**: add legalhelp911.com in Vercel > Domains and point DNS at it.
 3. **Anthropic credits**: article generation returns "credit balance is too
    low" until the Anthropic account is topped up. The wiring is correct.
@@ -70,7 +68,7 @@ consent, plus a `status` column (`new` / `contacted` / `sold` / `dead`).
    so it is safe to re-run and safe against a shared project.
 2. **Vercel**: import this repo (framework preset: Next.js) and add the env
    vars from `.env.example`.
-3. **Domain** and **phone number** as above.
+3. **Domain** as above.
 
 ## Local development
 

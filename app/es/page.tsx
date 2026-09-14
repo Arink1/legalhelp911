@@ -21,16 +21,11 @@ export const metadata: Metadata = {
 
 // Spanish practice-area names, written out rather than machine-translated.
 const AREAS_ES: Record<string, string> = {
-  injury: "Accidentes y lesiones",
   "criminal-defense": "Defensa criminal",
-  "family-divorce": "Familia y divorcio",
-  immigration: "Inmigración",
-  employment: "Empleo",
-  bankruptcy: "Bancarrota",
-  "workers-compensation": "Compensación laboral",
-  "real-estate": "Bienes raíces",
-  "wills-estates": "Testamentos y herencias",
+  "family-law": "Derecho de familia",
+  "civil-litigation": "Litigio civil",
   business: "Negocios",
+  "personal-injury": "Lesiones personales",
 };
 
 /**

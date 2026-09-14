@@ -469,16 +469,15 @@ export function getAttorney(slug: string): Attorney | undefined {
 
 /* ── Office ─────────────────────────────────────────────────────────── */
 
-// TODO: the firm has not supplied its city or street address yet.
 export const OFFICE = {
-  // Supplied by the firm in the handoff. Used verbatim on the homepage,
+  // Confirmed against the Florida Bar member profile. Used verbatim on the homepage,
   // contact page, footer, and in the LocalBusiness structured data.
-  street: "4403 Peters Rd",
-  city: "Plantation",
+  street: "3400 Lakeside Dr, Suite 100",
+  city: "Miramar",
   region: "FL",
-  postalCode: "33317",
+  postalCode: "33027",
   county: "Broward County",
-  address: "4403 Peters Rd, Plantation, FL 33317",
+  address: "3400 Lakeside Dr, Suite 100, Miramar, FL 33027",
   perks: ["Se habla espanol", "Accessible entrance"],
   hoursLine: "Mon to Fri, 9 to 6. Evenings and weekends by appointment.",
   hours: [
@@ -489,7 +488,7 @@ export const OFFICE = {
   afterHours: "After hours you reach our answering service, not voicemail.",
   directionsUrl:
     "https://www.google.com/maps/dir/?api=1&destination=" +
-    encodeURIComponent("4403 Peters Rd, Plantation, FL 33317"),
+    encodeURIComponent("3400 Lakeside Dr, Suite 100, Miramar, FL 33027"),
 };
 
 

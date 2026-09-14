@@ -6,7 +6,7 @@ import { PRACTICE_AREAS, SITE_NAME, OFFICE } from "@/lib/site";
 export const metadata: Metadata = {
   title: `Practice areas | ${SITE_NAME}`,
   description:
-    "Five practice areas out of one Plantation office: criminal defense, family law, civil litigation, business, and personal injury. How each is priced, in writing.",
+    "Five practice areas out of one Miramar office: criminal defense, family law, civil litigation, business, and personal injury. How each is priced, in writing.",
   alternates: { canonical: "/practice" },
 };
 

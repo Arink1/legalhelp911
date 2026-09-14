@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://legalhelp911.com"),
   title: "LegalHelp911 | Talk to a lawyer today, not next month",
   description:
-    "The Law Offices of Tyler A. Trumbach, P.A. handles criminal defense, family law, civil litigation, business matters, and personal injury from Plantation, Florida. The first case review is free.",
+    "The Law Offices of Tyler A. Trumbach, P.A. handles criminal defense, family law, civil litigation, business matters, and personal injury from Miramar, Florida. The first case review is free.",
   openGraph: {
     title: "LegalHelp911 | Talk to a lawyer today, not next month",
     description:

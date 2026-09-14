@@ -6,7 +6,7 @@ import VideoHero from "@/components/VideoHero";
 import PhotoSlot from "@/components/PhotoSlot";
 import LeadForm from "@/components/LeadForm";
 import { getPosts } from "@/lib/posts";
-import { PhoneIcon, CheckIcon, ClockIcon } from "@/components/Icons";
+import { PhoneIcon, CheckIcon, ClockIcon, ChevronRightIcon } from "@/components/Icons";
 import {
   PRACTICE_AREAS,
   getPractice,
@@ -227,14 +227,14 @@ export default async function PracticePage({ params }: Params) {
                         </li>
                       ))}
                     </ul>
-                    <a
-                      href={a.directTel}
-                      data-analytics="call_tap_practice_attorney"
-                      className="mt-3 inline-flex items-center gap-2 font-mono text-[12.5px] font-semibold hover:text-signal"
+                    <Link
+                      href="/contact"
+                      data-analytics="review_tap_practice_attorney"
+                      className="mt-3 inline-flex items-center gap-1 font-mono text-[12.5px] font-semibold hover:text-signal"
                     >
-                      <PhoneIcon className="h-3.5 w-3.5" />
-                      Call about this
-                    </a>
+                      Free case review
+                      <ChevronRightIcon className="h-3 w-3" />
+                    </Link>
                   </li>
                 ))}
               </ul>

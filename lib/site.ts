@@ -322,9 +322,6 @@ export type Attorney = {
   practices: string[];
   years: number;
   badges: string[];
-  directLine: string;
-  directTel: string;
-  email: string;
   bio: string;
   /** Full bio paragraphs, used on the bio page when supplied. */
   bioLong?: string[];
@@ -340,7 +337,7 @@ export type Attorney = {
 };
 
 // TODO: placeholder people. The handoff flags attorney names and count as
-// still needed from the firm. Replace names, roles, direct lines, and photos
+// still needed from the firm. Replace names, roles, and photos
 // before launch; nothing here should ship as-is.
 //
 // PORTRAIT WARNING: PLACEHOLDER_PORTRAIT is a generated likeness, not a real
@@ -356,9 +353,6 @@ export const ATTORNEYS: Attorney[] = [
     practices: ["civil-litigation", "criminal-defense", "business", "family-law", "personal-injury"],
     years: 0, // TODO: admission year not supplied; see YEARS_IN_PRACTICE note
     badges: ["Florida & New York bars", "Federal courts"],
-    directLine: PHONE_DISPLAY,
-    directTel: PHONE_TEL,
-    email: "tyler@legalhelp911.com", // TODO: confirm the real address
     bio:
       "Tyler Andrew Trumbach is admitted to the bars of both Florida and New York. He is the principal of the Law Offices of Tyler A. Trumbach, P.A., and handles a wide variety of matters while focusing on complex civil litigation and criminal defense.",
     bioLong: [
@@ -397,9 +391,6 @@ export const ATTORNEYS: Attorney[] = [
     practices: ["civil-litigation", "business", "personal-injury"],
     years: 0, // TODO: admission year not supplied
     badges: ["Trial lawyer", "Se habla espanol"],
-    directLine: PHONE_DISPLAY,
-    directTel: PHONE_TEL,
-    email: "jesmany@legalhelp911.com", // TODO: confirm the real address
     bio:
       "Jesmany Jomarron is a trial lawyer who serves as Of Counsel to the firm, focusing on complex, high exposure litigation.",
     bioLong: [
@@ -436,9 +427,6 @@ export const ATTORNEYS: Attorney[] = [
     practices: ["criminal-defense", "civil-litigation", "personal-injury"],
     years: 0, // TODO: admission year not supplied
     badges: ["Trial lawyer", "State and federal courts"],
-    directLine: PHONE_DISPLAY,
-    directTel: PHONE_TEL,
-    email: "mauricio@legalhelp911.com", // TODO: confirm the real address
     bio:
       "Mauricio Padilla is a trial lawyer focused on high stakes criminal defense and complex civil litigation.",
     bioLong: [

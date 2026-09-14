@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import FirmPage from "@/components/FirmPage";
 import PhotoSlot from "@/components/PhotoSlot";
-import { PhoneIcon, MailIcon, ChevronRightIcon } from "@/components/Icons";
+import { ChevronRightIcon } from "@/components/Icons";
 import { getPosts } from "@/lib/posts";
 import { ATTORNEYS, getAttorney, PRACTICE_AREAS, FIRM_NAME } from "@/lib/site";
 
@@ -44,7 +44,7 @@ export default async function AttorneyBio({ params }: Params) {
       ]}
       title={a.name}
       intro={`${a.role} · ${practiceNames.map((p) => p!.title).join(", ")}`}
-      ctaTitle={`Talk to ${a.name} directly.`}
+      ctaTitle="Have a matter for this attorney? Start with a free case review."
     >
       <div className="grid gap-8 lg:grid-cols-[1fr_1.5fr]">
         <div>
@@ -67,20 +67,19 @@ export default async function AttorneyBio({ params }: Params) {
               ))}
             </ul>
           )}
-          {/* The CTA here is to call this attorney, not the generic form */}
-          <div className="mt-5 space-y-2.5">
-            <a
-              href={a.directTel}
-              data-analytics="call_tap_attorney_bio"
+          {/* All contact runs through firm intake, never a direct line */}
+          <div className="mt-5">
+            <Link
+              href="/contact"
+              data-analytics="review_tap_attorney_bio"
               className="pill pill-primary w-full"
             >
-              <PhoneIcon className="h-4 w-4" />
-              Call direct
-            </a>
-            <a href={`mailto:${a.email}`} className="pill pill-outline w-full">
-              <MailIcon className="h-4 w-4" />
-              Email
-            </a>
+              Free case review
+              <ChevronRightIcon className="h-4 w-4" />
+            </Link>
+            <p className="mt-2 text-center text-[11.5px] text-muted">
+              Intake reviews every request and routes it to the right attorney.
+            </p>
           </div>
         </div>
 

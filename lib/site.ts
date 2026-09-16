@@ -77,7 +77,7 @@ export const PRACTICE_AREAS: PracticeArea[] = [
     intro:
       "A charge is not a conviction, and the window before your next court date is when most of the useful work happens. Bring us whatever paperwork you were given, even if it is only a citation.",
     costs:
-      "Criminal defense is usually quoted as a flat fee for a defined stage of the case, so you know the number before you commit. More serious matters are quoted stage by stage. Everything is set out in writing.",
+      "Usually quoted as a flat fee for a defined stage of the case, so you know the number before you commit. More serious matters are quoted stage by stage, in writing.",
     steps: [
       "Tell us the charge and your next court date.",
       "We review the paperwork and the stop, free.",
@@ -122,7 +122,7 @@ export const PRACTICE_AREAS: PracticeArea[] = [
     intro:
       "Family matters move on the court calendar rather than yours, and the first filing often shapes everything after it. Whether you are filing or responding, know where you stand before the deadline runs.",
     costs:
-      "Family work is generally billed hourly against a retainer, because how long it takes depends on how much is contested. We estimate the likely range at the first meeting and bill against it transparently.",
+      "Generally billed hourly against a retainer, because how long it takes depends on how much is contested. We estimate the likely range at the first meeting.",
     steps: [
       "Tell us what has been filed, if anything.",
       "We review the papers and your options, free.",
@@ -165,9 +165,9 @@ export const PRACTICE_AREAS: PracticeArea[] = [
     clip: "hero-courthouse",
     searchedFor: "Contract disputes, property claims, lawsuits, appeals",
     intro:
-      "If you have been served, the clock to respond is short and missing it can cost the case outright. If you are the one owed, the same deadlines cut the other way, so the sooner it is assessed the more options remain.",
+      "If you have been served, the clock to respond is short and missing it can cost the case outright. If you are the one owed, the same deadlines cut the other way.",
     costs:
-      "Litigation is billed hourly with an estimated range up front, and some claims can be taken on contingency depending on what is recoverable. We tell you plainly when a fight would cost more than it can return.",
+      "Billed hourly with an estimated range up front. Some claims can be taken on contingency depending on what is recoverable. We say plainly when a fight would cost more than it can return.",
     steps: [
       "Send us the complaint, notice, or contract.",
       "We check the response deadline, free.",
@@ -212,7 +212,7 @@ export const PRACTICE_AREAS: PracticeArea[] = [
     intro:
       "Most business disputes trace back to a document nobody read closely. Whether you are forming, signing, or already arguing, the contract is usually where the answer is.",
     costs:
-      "Formation and contract work is generally quoted as a flat fee. Disputes are billed hourly with an estimated range up front, and we will tell you plainly when a fight would cost more than it can recover.",
+      "Formation and contract work is generally quoted as a flat fee. Disputes are billed hourly with an estimated range up front.",
     steps: [
       "Send us the agreement or the dispute.",
       "We review the documents, free.",
@@ -263,9 +263,9 @@ export const PRACTICE_AREAS: PracticeArea[] = [
     clip: "hero-courthouse",
     searchedFor: "Car crashes, falls, dog bites, wrongful death",
     intro:
-      "Most injury cases turn on two things: what the medical record says, and how quickly it was created. If someone else caused your injury, the sooner an attorney sees the file, the more of it can still be repaired.",
+      "Most injury cases turn on two things: what the medical record says, and how quickly it was created. The sooner an attorney sees the file, the more of it can still be repaired.",
     costs:
-      "Injury matters are commonly handled on a contingency basis, where the fee comes out of any recovery rather than your pocket. Terms vary by case and are set out in writing before you sign. Court costs and case expenses are explained separately.",
+      "Commonly handled on a contingency basis, where the fee comes out of any recovery rather than your pocket. Terms vary by case and are set out in writing before you sign; court costs and case expenses are explained separately.",
     steps: [
       "Send us the crash or incident details.",
       "We request the records and review liability, free.",

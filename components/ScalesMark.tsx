@@ -1,57 +1,52 @@
 import type { CSSProperties } from "react";
 
 /**
- * The scales mark from the supplied logo, cut into five layers so the
- * crossbar and both trays can tip while the post and base stay planted
- * (the "Scales balancing" concept from the logo animation handoff).
+ * The Oak & Brass scales mark, sliced into five clip-path layers so the top
+ * beam and both pans can tip as one rigid group while the pivot block and
+ * plinth stay planted (the "weigh and settle" loop from the brand guide).
  *
- * The cuts are measured off the artwork and fall in empty space, so the
- * layers read as one solid mark. Size it with a width class; the height
- * follows the artwork's aspect ratio. `tone` recolors the navy artwork for
- * ink or white surfaces. The loop pauses under prefers-reduced-motion.
+ * Size it with a width class; the height follows the 46:44 mark box. `tone`
+ * picks the Oak artwork for light grounds or the Brass artwork for walnut.
+ * The loop pauses under prefers-reduced-motion. Legacy tones from the
+ * previous system ("brand", "ink", "white") still resolve.
  */
 export default function ScalesMark({
   className = "",
-  tone = "brand",
+  tone = "oak",
   live = true,
-  tip,
   speed,
   style,
 }: {
   className?: string;
-  tone?: "brand" | "ink" | "white";
-  /** Run the balancing loop. */
+  tone?: "oak" | "brass" | "brand" | "ink" | "white";
+  /** Run the weigh-and-settle loop. */
   live?: boolean;
-  /** Tip angle in degrees (default 7). */
-  tip?: number;
-  /** Loop length in seconds (default 7). */
+  /** Loop length in seconds (default 9). */
   speed?: number;
+  /** Accepted for older call sites; the guide fixes the tip at 7 degrees. */
+  tip?: number;
   style?: CSSProperties;
 }) {
-  const cls = [
-    "mark",
-    live && "mark-live",
-    tone === "white" && "mark-white",
-    tone === "ink" && "mark-ink",
-    className,
-  ]
+  const brass = tone === "brass" || tone === "white";
+  const cls = ["mark", live && "mark-live", brass && "mark-brass", className]
     .filter(Boolean)
     .join(" ");
   const vars = {
-    ...(tip !== undefined ? { "--tip": `${tip}deg` } : {}),
     ...(speed !== undefined ? { "--weigh": `${speed}s` } : {}),
     ...style,
   } as CSSProperties;
 
   return (
     <span className={cls} style={vars} aria-hidden="true">
-      {/* static: post shaft, base */}
-      <i style={{ clipPath: "inset(23.4% 38.6% 17.5% 38.3%)" }} />
-      <i style={{ clipPath: "inset(82.5% 22.9% 0 22.6%)" }} />
-      {/* moving as one rigid arm: crossbar + finial, left tray, right tray */}
-      <i className="arm" style={{ clipPath: "inset(0 0 76.6% 0)" }} />
-      <i className="arm" style={{ clipPath: "inset(23.4% 61.7% 17.5% 0)" }} />
-      <i className="arm" style={{ clipPath: "inset(23.4% 0 17.5% 61.4%)" }} />
+      <span>
+        {/* static: pivot block, plinth */}
+        <i style={{ clipPath: "inset(26.606% 39.276% 29.949% 42.636%)" }} />
+        <i style={{ clipPath: "inset(70.051% 27.003% 0 30.362%)" }} />
+        {/* moving as one rigid group: top beam, left pan, right pan */}
+        <i className="arm" style={{ clipPath: "inset(0 0 73.394% 0)" }} />
+        <i className="arm" style={{ clipPath: "inset(26.606% 57.364% 29.949% 0)" }} />
+        <i className="arm" style={{ clipPath: "inset(26.606% 0 29.949% 60.724%)" }} />
+      </span>
     </span>
   );
 }

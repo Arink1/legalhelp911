@@ -1,15 +1,22 @@
 import type { Metadata } from "next";
-import { Sofia_Sans } from "next/font/google";
+import { Libre_Baskerville, Karla } from "next/font/google";
 import "./globals.css";
 import LogoIntro from "@/components/LogoIntro";
 
-// One family for the whole site. Sofia Sans is the open substitute for the
-// design's MarkForMC, and it is variable, which matters because body copy
-// sits at weight 450, a half step.
-const sofia = Sofia_Sans({
+// Oak & Brass brand guide: Libre Baskerville for display (headlines,
+// wordmark, numerals, phone numbers), Karla for text and UI.
+const baskerville = Libre_Baskerville({
   subsets: ["latin"],
-  weight: "variable",
-  variable: "--font-sofia",
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-baskerville",
+  display: "swap",
+});
+
+const karla = Karla({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-karla",
   display: "swap",
 });
 
@@ -31,7 +38,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={sofia.variable}>
+    <html lang="en" className={`${baskerville.variable} ${karla.variable}`}>
       <body>
         <LogoIntro />
         {children}

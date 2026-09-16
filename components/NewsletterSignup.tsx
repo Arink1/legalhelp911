@@ -9,9 +9,10 @@ type Status = "idle" | "submitting" | "done" | "error";
 /**
  * Footer "Get legal tips by email" link and the newsletter modal it opens.
  *
- * The overlay scrolls (`overflow:auto`, `align-content: safe center`) and
- * the card's left panel has `min-height:0; overflow:auto`, so on a short
- * viewport the form is still reachable rather than clipped.
+ * Parchment dialog with a 1px walnut border, two columns (copy left, art
+ * right). The overlay scrolls (`overflow:auto`, `align-content: safe
+ * center`) and the copy panel has `min-height:0; overflow:auto`, so on a
+ * short viewport the form is still reachable rather than clipped.
  */
 export default function NewsletterSignup({
   className = "",
@@ -97,25 +98,14 @@ export default function NewsletterSignup({
             if (e.target === e.currentTarget) setOpen(false);
           }}
         >
-          <div className="relative grid w-full max-w-[760px] grid-rows-[minmax(0,1fr)] overflow-hidden rounded-[28px] bg-canvas shadow-card [max-height:calc(100vh-48px)] sm:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] sm:rounded-[40px]">
+          <div className="relative grid w-full max-w-[760px] grid-rows-[minmax(0,1fr)] overflow-hidden rounded-[2px] border border-walnut bg-parchment [max-height:calc(100vh-48px)] sm:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
             <button
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close"
-              className="absolute right-4 top-4 z-[2] grid h-11 w-11 place-items-center rounded-full bg-white text-ink"
+              className="absolute right-3.5 top-3.5 z-[2] grid h-11 w-11 place-items-center rounded-[2px] border-[1.5px] border-linen bg-parchment text-[20px] font-bold leading-none text-walnut"
             >
-              <svg
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                aria-hidden="true"
-              >
-                <path d="M18 6 6 18M6 6l12 12" />
-              </svg>
+              <span aria-hidden="true">&times;</span>
             </button>
 
             <div className="relative order-first min-h-[180px] sm:order-last sm:min-h-[320px]">
@@ -127,18 +117,18 @@ export default function NewsletterSignup({
               />
             </div>
 
-            <div className="min-h-0 min-w-0 overflow-auto p-6 sm:p-[clamp(32px,4vw,48px)]">
-              <ScalesMark className="w-12 sm:w-14" />
+            <div className="min-h-0 min-w-0 overflow-auto p-6 sm:p-[clamp(28px,4vw,44px)]">
+              <ScalesMark className="w-[56px] sm:w-[70px]" />
 
               {status === "done" ? (
                 <>
                   <h2
                     id="newsletter-title"
-                    className="mb-3 mt-8 text-[26px] font-medium leading-[1.15] tracking-[-0.02em]"
+                    className="mb-3 mt-7 font-display text-[26px] font-bold leading-[1.2] text-walnut"
                   >
                     You are on the list
                   </h2>
-                  <p className="mb-7 text-[15px] leading-normal text-muted">
+                  <p className="mb-6 text-[15px] leading-[1.65] text-muted">
                     One short email a month, and nothing else. Unsubscribe from
                     any of them.
                   </p>
@@ -152,19 +142,19 @@ export default function NewsletterSignup({
                 </>
               ) : (
                 <form onSubmit={submit} noValidate>
-                  <p className="eyebrow mt-8">Monthly email</p>
+                  <p className="label mt-7">Monthly email</p>
                   <h2
                     id="newsletter-title"
-                    className="mb-3 mt-4 text-[clamp(22px,2.6vw,30px)] font-medium leading-[1.15] tracking-[-0.02em] [text-wrap:pretty]"
+                    className="mb-3 mt-3.5 font-display text-[clamp(23px,2.6vw,28px)] font-bold leading-[1.2] text-walnut [text-wrap:pretty]"
                   >
                     Know what you can do before you need a lawyer
                   </h2>
-                  <p className="mb-7 text-[15px] leading-normal text-muted">
+                  <p className="mb-6 text-[15px] leading-[1.65] text-muted">
                     One plain-English email a month from the firm: the deadline
                     people miss, the clause people sign, the call worth making
                     early.
                   </p>
-                  <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-3.5">
                     <div>
                       <label htmlFor="nl-email" className="field-label">
                         Email address
@@ -204,7 +194,7 @@ export default function NewsletterSignup({
                       {status === "submitting" ? "Sending..." : "Sign me up"}
                     </button>
                   </div>
-                  <p className="mt-6 text-[13px] leading-normal text-muted">
+                  <p className="mt-[22px] text-[13px] leading-[1.5] text-muted">
                     By signing up you agree to receive email from the {FIRM_NAME}{" "}
                     General information only, not legal advice.
                   </p>

@@ -171,7 +171,7 @@ export default async function PracticePage({ params }: Params) {
                 <ol className="mt-4 mb-5 space-y-3">
                   {practice.steps.map((step, i) => (
                     <li key={step} className="flex items-start gap-3">
-                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brass font-mono text-[11px] font-bold text-white">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-[2px] bg-oak font-display text-[11px] font-bold text-white">
                         {i + 1}
                       </span>
                       <span className="pt-0.5 text-[15px] leading-snug text-muted">

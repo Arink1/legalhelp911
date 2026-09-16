@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ScalesMark from "@/components/ScalesMark";
 import { CASE_TYPES, PHONE_DISPLAY, PHONE_TEL } from "@/lib/site";
 
 type Status = "idle" | "submitting" | "sent" | "error";
@@ -161,34 +162,23 @@ export default function CaseReviewForm() {
 
   if (status === "sent") {
     return (
-      <div className="card flex flex-col gap-4 sm:p-10" data-analytics="lead_submitted">
-        <div className="grid h-14 w-14 place-items-center rounded-full bg-ink text-canvas">
-          <svg
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
-        </div>
-        <h2 className="text-[26px] font-medium leading-[1.2] tracking-[-0.02em]">
+      <div
+        className="card flex flex-col gap-4 md:p-[clamp(28px,3vw,40px)]"
+        data-analytics="lead_submitted"
+      >
+        <ScalesMark className="w-[66px]" />
+        <h2 className="font-display text-[26px] font-bold leading-[1.2] text-walnut">
           We have your details
         </h2>
-        <p className="text-[16px] leading-normal text-muted">
+        <p className="text-[16px] leading-[1.65] text-muted">
           Someone from the firm will call you back. If your matter has a hearing
           or a filing deadline in the next few days, call{" "}
-          <a href={PHONE_TEL} className="font-medium text-ink">
+          <a href={PHONE_TEL} className="font-bold text-walnut">
             {PHONE_DISPLAY}
           </a>{" "}
           now rather than waiting.
         </p>
-        <p className="text-[14px] leading-normal text-muted">
+        <p className="text-[13px] leading-[1.5] text-muted">
           Sending this form does not create an attorney-client relationship.
         </p>
         <div className="mt-2">
@@ -206,11 +196,11 @@ export default function CaseReviewForm() {
       id="case-review"
       onSubmit={handleSubmit}
       noValidate
-      className="card flex flex-col gap-5 sm:p-10"
+      className="card flex flex-col gap-5 md:p-[clamp(28px,3vw,40px)]"
     >
-      <h2 className="h3">Your details</h2>
+      <h2 className="h3 text-walnut">Your details</h2>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-5">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,180px),1fr))] gap-[18px]">
         <div>
           <label htmlFor="cr-name" className="field-label">
             Full name
@@ -252,7 +242,7 @@ export default function CaseReviewForm() {
         </div>
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-5">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,180px),1fr))] gap-[18px]">
         <div>
           <label htmlFor="cr-email" className="field-label">
             Email
@@ -329,7 +319,7 @@ export default function CaseReviewForm() {
       </div>
 
       <div>
-        <label className="flex items-start gap-3 text-[15px] leading-normal text-ink">
+        <label className="flex cursor-pointer items-start gap-3 text-[15px] leading-[1.55] text-mid">
           <input
             type="checkbox"
             name="consent"
@@ -349,12 +339,15 @@ export default function CaseReviewForm() {
       </div>
 
       {status === "error" && formError && (
-        <p role="alert" className="rounded-[20px] bg-canvas px-5 py-3 text-[14px] font-medium">
+        <p
+          role="alert"
+          className="rounded-[2px] border border-linen bg-parchment px-4 py-3 text-[14px] font-semibold text-walnut"
+        >
           {formError}
         </p>
       )}
 
-      <div className="mt-2 flex flex-wrap items-center gap-4">
+      <div className="mt-1 flex flex-wrap items-center gap-4">
         <button
           type="submit"
           disabled={status === "submitting"}
@@ -362,7 +355,7 @@ export default function CaseReviewForm() {
         >
           {status === "submitting" ? "Sending..." : "Send my matter"}
         </button>
-        <span className="text-[14px] leading-5 text-muted">
+        <span className="text-[13px] leading-[1.5] text-muted">
           Submitting does not create an attorney-client relationship.
         </span>
       </div>
